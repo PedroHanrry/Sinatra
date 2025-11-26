@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Ícones -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Estilo -->
+    <link rel="stylesheet" href="style-login.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <title>Login - Sinatra</title>
+  </head>
+  <body>
+    <main class="container">
+      <!-- Logo do restaurante -->
+      <img src="LogoS.png" class="logo-sinatra" alt="Logo Sinatra" />
+
+      <!-- FORMULÁRIO DE LOGIN -->
+      <form id="login-form">
+        <h1>Login Sinatra</h1>
+
+        <div class="input-box">
+          <input placeholder="Usuário" type="text" id="username" required />
+          <i class="bx bxs-user"></i>
+        </div>
+
+        <div class="input-box">
+          <input placeholder="Senha" type="password" id="password" required />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox" /> Lembrar senha</label>
+          <a href="#">Esqueci a senha</a>
+        </div>
+
+        <button type="submit" class="login">Entrar</button>
+
+        <!-- MENSAGEM DE ERRO -->
+        <p
+          id="login-error"
+          style="color: #ff8a80; margin-top: 10px; display: none"
+        >
+          Usuário ou senha inválidos.
+        </p>
+
+        <div class="registre-link">
+          <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+        </div>
+      </form>
+    </main>
+
+    <!-- JS DE LOGIN -->
+    <script src="login.js"></script>
+  </body>
+</html>

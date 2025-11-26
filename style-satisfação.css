@@ -1,0 +1,325 @@
+:root {
+  --sinatra-bg: #10141b;
+  --sinatra-bg-card: #181e26;
+  --sinatra-bg-soft: #1f2732;
+  --sinatra-gold: #c89c3c;
+  --sinatra-gold-soft: #e0b96a;
+  --sinatra-text: #f5f2e9;
+  --sinatra-text-muted: #c5c0b0;
+  --sinatra-border: rgba(255, 255, 255, 0.06);
+}
+
+/* GERAL */
+body {
+  background-color: var(--sinatra-bg);
+  font-family: "Lato", sans-serif;
+  color: var(--sinatra-text);
+}
+
+/* NAVBAR / LOGO */
+.navbar {
+  background: linear-gradient(90deg, #0c1016, #171f29);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  height: 80px;
+  width: auto;
+}
+
+.navbar-nav .nav-link {
+  color: var(--sinatra-text-muted) !important;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-item.active .nav-link {
+  color: var(--sinatra-gold-soft) !important;
+}
+
+/* TÍTULOS E CARDS */
+h1,
+h5 {
+  font-family: "Playfair Display";
+}
+
+.page-title {
+  margin-bottom: 2rem;
+}
+
+.card-pesquisa,
+.filtro-box,
+.card-table {
+  background-color: var(--sinatra-bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--sinatra-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* FORMULÁRIOS */
+label {
+  color: var(--sinatra-text-muted);
+  font-size: 0.9rem;
+}
+
+.form-control {
+  background-color: #121821;
+  border-color: #303848;
+  color: var(--sinatra-text);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.form-control::placeholder {
+  color: #707584;
+}
+
+.form-control:focus {
+  background-color: #151c26;
+  border-color: var(--sinatra-gold);
+  color: var(--sinatra-text);
+  box-shadow: 0 0 0 0.2rem rgba(200, 156, 60, 0.35);
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+hr {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------------------------------------------------
+   BOTÕES DOURADOS SINATRA — estilo unificado
+   --------------------------------------------------- */
+
+/* Botões principais (primary / success) */
+.btn-primary,
+.btn-success {
+  background-color: var(--sinatra-gold) !important;
+  border-color: var(--sinatra-gold) !important;
+  color: #17130b !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  background-color: var(--sinatra-gold-soft) !important;
+  border-color: var(--sinatra-gold-soft) !important;
+  box-shadow: 0 0 18px rgba(232, 185, 106, 0.35) !important;
+}
+
+/* Botão de Sair (outline vermelho → dourado outline) */
+.btn-outline-danger {
+  border-radius: 999px;
+  border: 2px solid var(--sinatra-gold) !important;
+  color: var(--sinatra-gold) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background-color: transparent !important;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--sinatra-gold-soft) !important;
+  color: #17130b !important;
+  box-shadow: 0 0 18px rgba(224, 185, 106, 0.4) !important;
+}
+
+/* SATISFAÇÃO GERAL (radios) */
+.nota-opcoes .form-check-input {
+  cursor: pointer;
+}
+
+.nota-opcoes .form-check-label {
+  color: var(--sinatra-text-muted);
+  font-size: 0.9rem;
+}
+
+.nota-opcoes .form-check-input:checked + .form-check-label {
+  color: var(--sinatra-gold-soft);
+  font-weight: 600;
+}
+
+/* MODAL */
+.modal-content {
+  background-color: var(--sinatra-bg-card);
+  color: var(--sinatra-text);
+  border-radius: 12px;
+  border: 1px solid var(--sinatra-border);
+}
+
+.modal-header.text-success {
+  background-color: rgba(40, 167, 69, 0.13);
+}
+
+.modal-header.text-danger {
+  background-color: rgba(220, 53, 69, 0.13);
+}
+
+#modal_btn.btn-success {
+  background-color: var(--sinatra-gold);
+  border-color: var(--sinatra-gold);
+}
+
+/* TABELA (consulta) */
+.table {
+  margin-bottom: 0;
+  color: var(--sinatra-text);
+}
+
+.table thead {
+  background-color: var(--sinatra-bg-soft);
+}
+
+.table thead th {
+  border-bottom: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sinatra-text-muted);
+}
+
+.table tbody tr {
+  background-color: #151b24;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #171e28;
+}
+
+.table tbody tr:hover {
+  background-color: #202735;
+}
+
+.table td,
+.table th {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+  font-size: 0.85rem;
+}
+
+/* Centralização das colunas de notas */
+.table td:nth-child(3),
+.table td:nth-child(4),
+.table td:nth-child(5),
+.table td:nth-child(6),
+.table td:nth-child(7),
+.table td:nth-child(8),
+.table td:nth-child(10) {
+  text-align: center;
+}
+
+/* PÍLULAS DE NOTA */
+.nota {
+  display: inline-block;
+  min-width: 24px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.nota-ruim {
+  background-color: rgba(220, 53, 69, 0.18);
+  color: #ff8a80;
+}
+
+.nota-med {
+  background-color: rgba(255, 193, 7, 0.22);
+  color: #ffe082;
+}
+
+.nota-boa {
+  background-color: rgba(40, 167, 69, 0.22);
+  color: #b9f6ca;
+}
+
+/* TEXTOS MENORES */
+small.text-muted {
+  color: #8f8a7b !important;
+}
+
+/* RESPONSIVO */
+@media (max-width: 991.98px) {
+  .card-pesquisa {
+    margin-bottom: 2rem;
+  }
+
+  .table td:nth-child(9) {
+    max-width: 200px;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 767.98px) {
+  h1.display-4 {
+    font-size: 2rem;
+  }
+
+  .page-title {
+    font-size: 2.1rem;
+  }
+
+  .navbar-brand img {
+    height: 80px;
+  }
+
+  .form-row > [class^="col-"] {
+    margin-bottom: 0.5rem;
+  }
+
+  .nota-opcoes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .nota-opcoes .form-check-inline {
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+}
+@media (max-width: 576px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .card-pesquisa,
+  .filtro-box,
+  .card-table {
+    padding: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand img {
+    height: 52px; /* menor no celular */
+  }
+
+  .navbar {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+}

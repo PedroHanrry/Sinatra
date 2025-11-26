@@ -1,0 +1,348 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicon Sinatra -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <title>Pesquisa de satisfação</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Fontes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="style-satisfação.css" />
+
+    <!-- JS -->
+    <script src="app.js"></script>
+  </head>
+
+  <body>
+    <!-- 🔒 PROTEÇÃO DE LOGIN -->
+    <script>
+      if (localStorage.getItem("auth_sinatra") !== "true") {
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <nav class="navbar navbar-expand-lg navbar-dark mb-5">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="LogoS.png" alt="Sinatra Restaurante" />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Pesquisa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="consulta.html">Dados coletados</a>
+            </li>
+          </ul>
+
+          <!-- BOTÃO DE SAIR -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <button class="btn btn-sm btn-outline-danger" onclick="logout()">
+                Sair
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h1 class="display-4 page-title text-center">
+            Pesquisa de satisfação
+          </h1>
+
+          <div class="card card-pesquisa shadow-sm">
+            <div class="card-body">
+              <!-- DADOS BÁSICOS -->
+              <h5 class="mb-3">Dados da visita</h5>
+
+              <div class="form-group">
+                <label for="nome_cliente">Nome do cliente (opcional)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome_cliente"
+                  placeholder="Ex.: João da Silva"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Data da visita</label>
+                <div class="form-row">
+                  <div class="col-12 col-sm-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="dia_visita"
+                      placeholder="Dia"
+                      maxlength="2"
+                    />
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="mes_visita"
+                      placeholder="Mês"
+                      maxlength="2"
+                    />
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ano_visita"
+                      placeholder="Ano"
+                      maxlength="4"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="qtd_pessoas"
+                  >Quantidade de pessoas na mesa (opcional)</label
+                >
+                <input
+                  type="number"
+                  min="1"
+                  class="form-control"
+                  id="qtd_pessoas"
+                  placeholder="Ex.: 2"
+                />
+              </div>
+
+              <hr />
+
+              <!-- NOTAS DETALHADAS -->
+              <h5 class="mb-3">Avaliação detalhada</h5>
+
+              <div class="form-group">
+                <label for="nota_refeicao">Qual a nota para a refeição?</label>
+                <select class="form-control" id="nota_refeicao">
+                  <option value="">Selecione...</option>
+                  <option value="1">1 - Muito ruim</option>
+                  <option value="2">2 - Ruim</option>
+                  <option value="3">3 - Regular</option>
+                  <option value="4">4 - Bom</option>
+                  <option value="5">5 - Excelente</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="nota_atendimento"
+                  >Qual a nota para o atendimento?</label
+                >
+                <select class="form-control" id="nota_atendimento">
+                  <option value="">Selecione...</option>
+                  <option value="1">1 - Muito ruim</option>
+                  <option value="2">2 - Ruim</option>
+                  <option value="3">3 - Regular</option>
+                  <option value="4">4 - Bom</option>
+                  <option value="5">5 - Excelente</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="nome_garcom">Nome do garçom (opcional)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome_garcom"
+                  placeholder="Ex.: Carlos"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="nota_ambiente">Qual a nota para o ambiente?</label>
+                <select class="form-control" id="nota_ambiente">
+                  <option value="">Selecione...</option>
+                  <option value="1">1 - Muito ruim</option>
+                  <option value="2">2 - Ruim</option>
+                  <option value="3">3 - Regular</option>
+                  <option value="4">4 - Bom</option>
+                  <option value="5">5 - Excelente</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="nota_tempo"
+                  >Qual a nota para o tempo de espera?</label
+                >
+                <select class="form-control" id="nota_tempo">
+                  <option value="">Selecione...</option>
+                  <option value="1">1 - Muito ruim</option>
+                  <option value="2">2 - Ruim</option>
+                  <option value="3">3 - Regular</option>
+                  <option value="4">4 - Bom</option>
+                  <option value="5">5 - Excelente</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="nota_preco">Qual a nota para o preço?</label>
+                <select class="form-control" id="nota_preco">
+                  <option value="">Selecione...</option>
+                  <option value="1">1 - Muito ruim</option>
+                  <option value="2">2 - Ruim</option>
+                  <option value="3">3 - Regular</option>
+                  <option value="4">4 - Bom</option>
+                  <option value="5">5 - Excelente</option>
+                </select>
+              </div>
+
+              <div class="form-group mt-4">
+                <h5 class="mb-2">Satisfação geral</h5>
+                <div class="nota-opcoes">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="nota_geral"
+                      id="ng1"
+                      value="1"
+                    />
+                    <label class="form-check-label" for="ng1">1</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="nota_geral"
+                      id="ng2"
+                      value="2"
+                    />
+                    <label class="form-check-label" for="ng2">2</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="nota_geral"
+                      id="ng3"
+                      value="3"
+                    />
+                    <label class="form-check-label" for="ng3">3</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="nota_geral"
+                      id="ng4"
+                      value="4"
+                    />
+                    <label class="form-check-label" for="ng4">4</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="nota_geral"
+                      id="ng5"
+                      value="5"
+                    />
+                    <label class="form-check-label" for="ng5">5</label>
+                  </div>
+                </div>
+              </div>
+
+              <hr />
+
+              <h5 class="mb-3">Comentário</h5>
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  id="comentario"
+                  rows="4"
+                  placeholder="Deixe aqui um elogio, sugestão ou crítica."
+                ></textarea>
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="cadastrarDespesa()"
+                >
+                  Enviar pesquisa
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="modalRegistraDespesa"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div id="modal_titulo_div" class="modal-header">
+            <h5 class="modal-title" id="modal_titulo"></h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal_conteudo"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              data-dismiss="modal"
+              id="modal_btn"
+              class="btn btn-secondary"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

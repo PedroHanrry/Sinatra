@@ -1,0 +1,188 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <title>Consulta - Pesquisa de satisfação</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Fontes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome para o ícone da lupa -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="style-satisfação.css" />
+
+    <!-- JS -->
+    <script src="app.js"></script>
+  </head>
+
+  <body onload="carregaListaDespesas()">
+    <!-- 🔒 PROTEÇÃO DE LOGIN -->
+    <script>
+      if (localStorage.getItem("auth_sinatra") !== "true") {
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <nav class="navbar navbar-expand-lg navbar-dark mb-5">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="LogoS.png" alt="Pesquisa de satisfação" />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Cadastro</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="consulta.html">Consulta</a>
+            </li>
+          </ul>
+
+          <!-- BOTÃO DE SAIR -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <button class="btn btn-sm btn-outline-danger" onclick="logout()">
+                Sair
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <h1 class="display-4">Pesquisas registradas</h1>
+        </div>
+
+        <div
+          class="col-md-6 d-flex align-items-center justify-content-md-end mt-3 mt-md-0"
+        >
+          <button class="btn btn-success" onclick="exportarCSV()">
+            <i class="fas fa-file-download"></i> Exportar CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="card filtro-box mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <label>Data da visita</label>
+              <div class="form-row">
+                <div class="col-4">
+                  <input
+                    type="text"
+                    id="dia_visita_filtro"
+                    class="form-control"
+                    placeholder="Dia"
+                    maxlength="2"
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="text"
+                    id="mes_visita_filtro"
+                    class="form-control"
+                    placeholder="Mês"
+                    maxlength="2"
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="text"
+                    id="ano_visita_filtro"
+                    class="form-control"
+                    placeholder="Ano"
+                    maxlength="4"
+                  />
+                </div>
+              </div>
+              <small class="text-muted">
+                Você pode filtrar só pelo dia, só pelo mês, só pelo ano ou
+                combinar.
+              </small>
+            </div>
+
+            <div class="col-md-4 mb-3 mb-md-0">
+              <label>Nota geral</label>
+              <select class="form-control" id="nota_filtro">
+                <option value="">Todas</option>
+                <option value="1">1 - Muito ruim</option>
+                <option value="2">2 - Ruim</option>
+                <option value="3">3 - Regular</option>
+                <option value="4">4 - Bom</option>
+                <option value="5">5 - Excelente</option>
+              </select>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+              <button
+                class="btn btn-primary w-100"
+                onclick="pesquisarDespesa()"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABELA -->
+      <div class="card card-table">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Cliente</th>
+                  <th>Nota geral</th>
+                  <th>Refeição</th>
+                  <th>Atendimento</th>
+                  <th>Ambiente</th>
+                  <th>Tempo</th>
+                  <th>Preço</th>
+                  <th>Comentário</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="listaDespesas"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
